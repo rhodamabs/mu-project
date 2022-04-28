@@ -2,12 +2,13 @@
 Tic tac toe solution by Rhoda Mabundu
 """
 # Declaring a board container
-game_board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-payer = ''
+game_board = ['-', '-', '-', '-', '-', '-', '-', '-', '-']
+
 
 def main():
     player_1 = input('Enter your name: ')
     player_2 = input('Enter your name: ')
+    game= print_game_board(game_board)
     for num in range(9):
         if num%2 == 0:
             x = inpt(game_board)
@@ -61,7 +62,7 @@ def player_moves(game_board):
 
 # User input
 def inpt(game_board):
-    x = int(input(f"{player}'s turn to choose a square (1-9): "))
+    x = int(input("Please choose a square (1-9): "))
     if game_board[x - 1]!= '-':
         print('Value exists choose a different value: ')
         return inpt(game_board)
