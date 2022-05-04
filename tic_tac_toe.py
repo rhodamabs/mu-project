@@ -5,29 +5,20 @@ Tic tac toe solution by Rhoda Mabundu
 #printing the game-board for user to see
 
 def main():
+    player = next_player("")
     game_board = create_board()
+    while not (winner(game_board) or is_a_draw(game_board)):
+        print_game_board(game_board)
+        make_move(player, game_board)
+        player = next_player(player)
     print_game_board(game_board)
-    for num in game_board:
-        #if num%2 == 0:
-            x = inp(game_board)
-            game_board[x-1] = 'x'
-            print_game_board(game_board)
-            if player_moves(game_board):
-                print(f'{player_1} wins!!!')
-                break
-            else:
-                    o = inp(game_board)
-                    game_board[x-1] = 'o'
-                    print_game_board(game_board)
-                    if player_moves(game_board):
-                        print(f'{player_2} wins!!!')
-                        break
-            print('Game Over')
-
+    print("Good game. Thanks for playing!") 
 
 def create_board():
-    game_board = ['1', '2', '3', '4', '5', '6', '7', '8', '9',]
-    return game_board
+    board = []
+    for square in range(9):
+        board.append(square + 1)
+    return board
 
 def print_game_board(game_board):
     print()
@@ -38,9 +29,13 @@ def print_game_board(game_board):
     print(f"{game_board[6]}|{game_board[7]}|{game_board[8]}")
     print()
 
+def is_a_draw(board):
+    for square in range(9):
+        if board[square] != "x" and board[square] != "o":
+            return False
+    return True 
 
-
-def player_moves(game_board):
+def winner(game_board):
     player_1 = 'x'
     player_2 = 'o'
     if game_board[0] == game_board[1] == game_board[2] == player_1 or game_board[0] == game_board[1] == game_board[2] == player_2:
@@ -62,15 +57,16 @@ def player_moves(game_board):
     else:
         return False
 
-def inp(game_board):
-    x = int(input('Enter number within the range of 1 to 9:'))
-    if game_board[x-1]!='-':     
-        print()
-        return inp(game_board)
-    else:
-         return x
+def make_move(player, board):
+    square = int(input(f"{player}'s turn to choose a square (1-9): "))
+    board[square - 1] = player
+
+def next_player(current):
+    if current == "" or current == "o":
+        return "x"
+    elif current == "x":
+        return "o"
 
 
 if __name__ == '__main__':
     main()
- 
